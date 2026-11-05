@@ -65,7 +65,11 @@
                 if (component == null) // The component script is probably missing.
                     continue;
                 
-                int instanceId = component.GetInstanceID();
+#if UNITY_6000_4_OR_NEWER
+                var instanceId = component.GetEntityId();
+#else
+                var instanceId = component.GetInstanceID();
+#endif
                 if (foundObjects.Components.Contains(instanceId))
                     continue;
 
@@ -146,7 +150,11 @@
 
         private static IEnumerable<SerializedObject> GetSerializedObjectsFromScriptableObject(Object scriptableObject, FoundObjects foundObjects)
         {
+#if UNITY_6000_4_OR_NEWER
+            var instanceId = scriptableObject.GetEntityId();
+#else
             var instanceId = scriptableObject.GetInstanceID();
+#endif
             if (foundObjects.ScriptableObjects.Contains(instanceId))
                 yield break;
 
