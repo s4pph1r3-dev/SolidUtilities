@@ -171,8 +171,13 @@
             
         public class FoundObjects
         {
+#if UNITY_6000_4_OR_NEWER
+            public readonly HashSet<EntityId> ScriptableObjects = new HashSet<EntityId>();
+            public readonly HashSet<EntityId> Components = new HashSet<EntityId>();
+#else
             public readonly HashSet<int> ScriptableObjects = new HashSet<int>();
             public readonly HashSet<int> Components = new HashSet<int>();
+#endif
             public readonly HashSet<string> Prefabs = new HashSet<string>();
         }
     }
